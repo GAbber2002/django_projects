@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>View All Book Records</title>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <style>
+    body {
+      background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: "Open Sans", sans-serif;
+      color: #333333;
+    }
+
+    #header
+    {
+      width:100%;
+      height:100%;
+      background: rgb(100,31,152);
+      background: linear-gradient(90deg, rgba(100,31,152,1) 0%, rgba(37,86,174,0.8632703081232493) 72%, rgba(0,212,255,1) 100%);
+      padding:20px;
+      background-repeat:no-repeat;
+      background-size: cover;
+    }
+
+    #box
+    {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+    }
+    #box div
+    {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: white;
+      margin: 10px;
+      padding: 15px;
+      text-align: center;
+      width: calc(25% - 40px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    #box button
+    {
+      border-radius: 5px;
+      background-color:rgb(209, 246, 247);
+      padding: 3px;
+
+    }
+    #header h1
+    {
+      font-style: italic;
+      font-family:Allegro;
+      font-size:150px;
+      padding: 0px;
+      color: white;
+      margin: auto;
+
+    }
+    footer
+    {
+    text-align: center;
+    padding: 20px;
+    background-color: #2874f0;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    }
+
+
+    </style>
+
+  </head>
+  <body>
+    <div id="header">
+      <h1>Bookify</h1>
+      <p>Hello, {{request.session.username}} </p>
+      <div id="nav">
+        <a href="http://localhost:8000/brm/view-books">View Books</a>
+        <a href="http://localhost:8000/brm/new-book">Add New Book</a>
+        <a href="http://localhost:8000/brm/search-book">Search Books</a>
+        <a href="http://localhost:8000/brm/logout/">Logout</a>
+      </div>
+    </div>
+
+      <br>
+      <div id="box">
+        {% for book in books %}
+        <div>
+          <img src="{% static '/img/lnctbook.jpg' %}" alt="Product 2" height="200px" width="150px"><br>
+        <h4>Title - {{book.title}}</h4>
+         Wariter - {{book.author}}<br>
+          Price - ₹{{book.price}}<br>
+          Publisher - {{book.publisher}}<br><br>
+        <button>  <a href="http://localhost:8000/brm/edit-book?bookid={{book.id}}">Edit</a></button>
+        <button>  <a href="http://localhost:8000/brm/delete-book?bookid={{book.id}}">Delete</a></button>
+        </div>
+        {% endfor %}
+
+    </div>
+    <footer>
+        <p>&copy; 2024 Bookify</p>
+    </footer>
+  </body>
+
+</html>
